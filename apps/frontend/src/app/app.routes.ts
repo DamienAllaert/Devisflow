@@ -3,13 +3,20 @@ import { Routes } from '@angular/router';
 export const routes: Routes = [
     {
     path: '',
-    redirectTo: 'dashboard',
-    pathMatch: 'full'
-  },
-  {
-    path: 'dashboard',
     loadComponent: () =>
-      import('./pages/dashboard/dashboard')
-        .then(m => m.Dashboard)
+      import('./layout/layout').then(m => m.Layout),
+    children: [
+      {
+        path: '',
+        redirectTo: 'dashboard',
+        pathMatch: 'full'
+      },
+      {
+        path: 'dashboard',
+        loadComponent: () =>
+          import('./pages/dashboard/dashboard')
+            .then(m => m.Dashboard)
+      }
+    ]
   }
 ];
